@@ -9,6 +9,8 @@ public class CategoryRVModal {
         this.categoryImageUrl = categoryImageUrl;
     }
 
+
+
     public String getCatrgory() {
         return category;
     }
