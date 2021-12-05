@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements CategoryRVAdapter
                 }
                 newsRVAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onFailure(Call<NewsModel> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Fail to get News!", Toast.LENGTH_SHORT).show();
