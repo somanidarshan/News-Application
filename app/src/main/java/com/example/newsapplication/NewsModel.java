@@ -12,6 +12,9 @@ public class NewsModel {
         this.articles = articles;
     }
 
+
+
+
     public int getTotalResults() {
         return totalResults;
     }
