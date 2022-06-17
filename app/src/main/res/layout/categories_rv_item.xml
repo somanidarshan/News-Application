@@ -5,34 +5,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     app:cardCornerRadius="8dp"
-    >
+    android:layout_margin="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
         <ImageView
+            android:id="@+id/categoryIV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/idIVCategory"
-            android:src="@color/yellow"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop" />
+
         <TextView
+            android:id="@+id/categoriesTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_centerInParent="true"
-            android:text="Category"
-            android:textColor="@color/white"
-            android:textAlignment="center"
+            android:gravity="center"
             android:padding="3dp"
-            android:textStyle="bold"
-            android:id="@+id/idTVCategory"/>
+            android:shadowColor="@color/black"
+            android:shadowDx="4"
+            android:shadowDy="3"
+            android:shadowRadius="6"
+            android:text="Category"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        
-        
-        
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

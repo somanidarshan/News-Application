@@ -3,56 +3,101 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="4dp"
-    app:cardBackgroundColor="@color/grey">
-
-
+    android:layout_margin="6dp"
+    app:cardCornerRadius="6dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <ImageView
+            android:id="@+id/idImageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/idIVNews"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
         <TextView
+            android:id="@+id/idTitleTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/idTVNewsHeading"
-            android:text="News Heading"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/yellow"
-            android:padding="3dp"
-            android:layout_below="@id/idIVNews"
+            android:layout_below="@+id/idImageView"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
             android:maxLines="2"
-            android:layout_margin="3dp"
-            />
+            android:padding="3dp"
+            android:text="News Heading"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/idSubTitleTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sub Heading"
-            android:layout_below="@id/idTVNewsHeading"
-            android:textColor="@color/white"
-             android:maxLines="3"
-            android:layout_margin="3dp"
+            android:layout_below="@+id/idTitleTV"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:maxLines="3"
             android:padding="3dp"
-            android:id="@+id/idTVSubHeading"
-            />
+            android:text="Sub Heading"
+            android:textColor="@color/black" />
 
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/idSubTitleTV">
 
+            <TextView
+                android:id="@+id/idSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:padding="3dp"
+                android:text="source"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/idSource"
+                android:paddingTop="3dp"
+                android:text="."
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/idSource" />
 
+            <TextView
+                android:id="@+id/idTimeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_toEndOf="@id/dot"
+                android:padding="3dp"
+                android:text="time"
+                android:layout_toRightOf="@id/dot" />
 
+            <ImageView
+                android:id="@+id/shareImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="3dp"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/share" />
 
-
+        </RelativeLayout>
 
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>

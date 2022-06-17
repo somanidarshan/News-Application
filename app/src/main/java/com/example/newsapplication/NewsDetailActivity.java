@@ -1,4 +1,5 @@
 package com.example.newsapplication;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,37 +11,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
 public class NewsDetailActivity extends AppCompatActivity {
-    String title,desc,content,imageUrl,url;
-   private  TextView titletv,subdesc,contenttv;
-   private ImageView newsIv;
-   private Button btn;
+    private TextView titleTV, subDescTV, contentTV;
+    private ImageView newsIV;
+    private Button readNewsBtn;
+    String title, desc, content, imageUrl, url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
 
-        title=getIntent().getStringExtra("title");
-        desc=getIntent().getStringExtra("desc");
-        content=getIntent().getStringExtra("content");
-        url=getIntent().getStringExtra("url");
-        imageUrl=getIntent().getStringExtra("image");
+        titleTV = findViewById(R.id.titleTV);
+        subDescTV = findViewById(R.id.SubDesc);
+        contentTV = findViewById(R.id.TVcontent);
+        newsIV = findViewById(R.id.NewsImage);
+        readNewsBtn = findViewById(R.id.idReadNewsBtn);
 
-        titletv=findViewById(R.id.idTVTitle);
-        subdesc=findViewById(R.id.idTVSubdescription);
-        contenttv=findViewById(R.id.idTVContent);
-        newsIv =findViewById(R.id.idIVNews);
-        btn=findViewById(R.id.idBtnreadnews);
-        titletv.setText(title);
-        subdesc.setText(desc);
-        contenttv.setText(content);
-        Picasso.get().load(imageUrl).into(newsIv);
-        btn.setOnClickListener(new View.OnClickListener() {
+        title = getIntent().getStringExtra("title");
+        content = getIntent().getStringExtra("content");
+        desc = getIntent().getStringExtra("desc");
+        imageUrl = getIntent().getStringExtra("image");
+        url = getIntent().getStringExtra("url");
+
+        titleTV.setText(title);
+        subDescTV.setText(desc);
+        contentTV.setText(content);
+        Picasso.get().load(imageUrl).into(newsIV);
+
+        readNewsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inten=new Intent(Intent.ACTION_VIEW);
-                inten.setData(Uri.parse(url));
-                startActivity(inten);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
             }
         });
     }

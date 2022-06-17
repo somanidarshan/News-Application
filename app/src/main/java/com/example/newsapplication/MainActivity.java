@@ -16,84 +16,104 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements CategoryRVAdapter.CategorClickInterface{
-//e629a7ac538b42319369e3dd4412d980
+import android.util.Log;
+import android.widget.ImageView;
 
-    private RecyclerView newsRV,categoryRV;
-    private ProgressBar loadingPB;
+public class MainActivity extends AppCompatActivity implements CategoryRVAdapter.categoryClickInterface{
+    // ea39a79a90e044fb98ce7f58e6394c2d
+    private NewsAdapter adapter;
+    ProgressBar progressBar,categoryPB;
+    private RecyclerView recyclerView, categoryRV;
     private ArrayList<Articles> articlesArrayList;
-    private ArrayList<CategoryRVModal> categoryRVModalArrayList;
+    private ArrayList<CategoryRVmodal> categoryArrayList;
     private CategoryRVAdapter categoryRVAdapter;
-    private NewsRVAdapter newsRVAdapter;
+    ImageView shareImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        newsRV=findViewById(R.id.idRVNews);
-        categoryRV=findViewById(R.id.idRVCategories);
-        loadingPB=findViewById(R.id.idPLoading);
-        articlesArrayList=new ArrayList<>();
-        categoryRVModalArrayList=new ArrayList<>();
-        newsRVAdapter=new NewsRVAdapter(articlesArrayList,this);
-        categoryRVAdapter=new CategoryRVAdapter(categoryRVModalArrayList,this,this::onCategoryClick);
-        newsRV.setLayoutManager(new LinearLayoutManager(this));
-        newsRV.setAdapter(newsRVAdapter);
+
+        recyclerView = findViewById(R.id.idRecyclerView);
+        categoryRV = findViewById(R.id.idCategoryRV);
+        progressBar = findViewById(R.id.ProgressBar);
+        categoryPB = findViewById(R.id.CategoryProgressBar);
+        articlesArrayList = new ArrayList<>();
+        categoryArrayList = new ArrayList<>();
+        adapter = new NewsAdapter(articlesArrayList,this);
+        categoryRVAdapter = new CategoryRVAdapter(categoryArrayList, this,this::onCategoryClick);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
         categoryRV.setAdapter(categoryRVAdapter);
         getCategories();
-        getNews("ALL");
-        newsRVAdapter.notifyDataSetChanged();
+        getNews("All");
+        categoryRV.getRecycledViewPool().clear();
+        recyclerView.getRecycledViewPool().clear();
+        adapter.notifyDataSetChanged();
     }
     private void getCategories(){
-        categoryRVModalArrayList.add(new CategoryRVModal("ALL","https://kashmirobserver.net/wp-content/uploads/2020/11/Online-News.jpg"));
-        categoryRVModalArrayList.add(new CategoryRVModal("Technology","https://www.israel21c.org/wp-content/uploads/2018/03/terahertz-computer-chip.jpg"));
-        categoryRVModalArrayList.add(new CategoryRVModal("Science","https://lh3.googleusercontent.com/v7YS0RTr51SGILmKKJYnYbQl-Zu_IqbYU3MW5TscpGKbI6sutre9S6shkOKr_l2OEckn"));
-        categoryRVModalArrayList.add(new CategoryRVModal("Sports","https://www.springfieldjcc.org/wp-content/uploads/2019/08/Sports-Rec.jpg"));
-        categoryRVModalArrayList.add(new CategoryRVModal("General","https://i.ytimg.com/vi/uLuvY9mbgf4/maxresdefault.jpg"));
-        categoryRVModalArrayList.add(new CategoryRVModal("Entertainment","https://infoshri.com/wp-content/uploads/2021/11/675312-entertainment-news-npd-pattern-tracker-from-cookies-cream-chickpeas-to-katsu-curry-rice.jpg"));
-        categoryRVModalArrayList.add(new CategoryRVModal("Health","https://schweikert.house.gov/sites/schweikert.house.gov/files/featured_image/issues/Healthcare.jpg"));
+        categoryArrayList.add(new CategoryRVmodal("All","https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/SKD-bqAkQjhvrjayf/videoblocks-news-intro-graphic-animation-with-grid-and-world-map-abstract-background-elegant-and-luxury-dynamic-style-for-news-and-business-template_ry_hdemhl_thumbnail-1080_01.png"));
+        categoryArrayList.add(new CategoryRVmodal("Technology","https://www.deaf-interpreter.com/wp-content/uploads/2016/02/digital_diagram_business_and_technology_by_prophotostock-d711fj6.jpg"));
+        categoryArrayList.add(new CategoryRVmodal("Science","https://getwallpapers.com/wallpaper/full/b/0/b/1407474-full-size-science-backgrounds-3840x2160-for-full-hd.jpg"));
+        categoryArrayList.add(new CategoryRVmodal("Sports","https://lifestyle.iresearchnet.com/wp-content/uploads/2017/03/sports-psychology-26.jpg"));
+        categoryArrayList.add(new CategoryRVmodal("General","http://www.panaynews.net/wp-content/uploads/2018/08/DSC_8930-2.jpg"));
+        categoryArrayList.add(new CategoryRVmodal("Business","https://headsinternational.com/site/wp-content/uploads/business-professional-service.jpg"));
+        categoryArrayList.add(new CategoryRVmodal("Entertainment","https://cpanews.net/wp-content/uploads/2021/12/Live-Party-Entertainment-Ideas-For-Your-Next-Celebration.jpg"));
+        categoryArrayList.add(new CategoryRVmodal("Health","https://viridianadvisors.com/wp-content/uploads/2015/07/health-background.jpg"));
         categoryRVAdapter.notifyDataSetChanged();
     }
 
     private void getNews(String category){
-        loadingPB.setVisibility(View.GONE);
+        categoryRV.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        categoryPB.setVisibility(View.VISIBLE);
+
         articlesArrayList.clear();
-        String categoryUrl="https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apiKey=e629a7ac538b42319369e3dd4412d980";
-        String url="https://newsapi.org/v2/top-headlines?country=in&excludeDomains=stackoverflow.com&sortBy=publishedAt&language=en&apikey=e629a7ac538b42319369e3dd4412d980";
-        String BASE_URL="https://newsapi.org/";
-        Retrofit retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
+        String categoryUrl = "https://newsapi.org/v2/top-headlines?country=in&category="+ category + "&apikey=ea39a79a90e044fb98ce7f58e6394c2d";
+        String url = "https://newsapi.org/v2/top-headlines?country=in&language=en&apiKey=ea39a79a90e044fb98ce7f58e6394c2d";
+
+        String Base_Url = "https://newsapi.org/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Base_Url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        RetrofitAPI retrofitAPI=retrofit.create(RetrofitAPI.class);
-        Call<NewsModel> call;
-        if(category.equals("ALL")){
-            call=retrofitAPI.getAllNews(url);
+        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+        Call<NewsModal> call;
+        if(category.equals("All")){
+            call = retrofitAPI.getAllNews(url);
         }
         else{
-            call=retrofitAPI.getNewsByCategory(categoryUrl);
+            call = retrofitAPI.getNewsByCategory(categoryUrl);
         }
-        call.enqueue(new Callback<NewsModel>() {
+
+        call.enqueue(new Callback<NewsModal>() {
             @Override
-            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                NewsModel newsModel=response.body();
-                loadingPB.setVisibility(View.GONE);
-                ArrayList<Articles> articless=newsModel.getArticles();
-                int s=articless.size();
-                for(int i=0;i<s;i++){
-                    articlesArrayList.add(new Articles(articless.get(i).getTittle(),articless.get(i).getDescription(),articless.get(i).getUrlToImage(),
-                            articless.get(i).getUrl(),articless.get(i).getContent()));
+            public void onResponse(Call<NewsModal> call, Response<NewsModal> response) {
+                NewsModal newsModal = response.body();
+                progressBar.setVisibility(View.GONE);
+                categoryPB.setVisibility(View.GONE);
+                categoryRV.setVisibility(View.VISIBLE);
+
+                ArrayList<Articles> articles = newsModal.getArticles();
+                for(int i=0;i<articles.size();i++){
+                    articlesArrayList.add(new Articles(articles.get(i).getTitle(),articles.get(i).getDescription(),
+                            articles.get(i).getUrlToImage(),articles.get(i).getUrl(),articles.get(i).getContent(),articles.get(i).getSource(), articles.get(i).getMpublishedAt()));
+                    Log.i("MainActivity", "time = "+ articlesArrayList.get(i).getMpublishedAt());
                 }
-                newsRVAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
+
             @Override
-            public void onFailure(Call<NewsModel> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Fail to get News!", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<NewsModal> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Connection Error", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onCategoryClick(int position) {
-        String category=categoryRVModalArrayList.get(position).getCatrgory();
+        String category = categoryArrayList.get(position).getCategory();
         getNews(category);
     }
+
 }
