@@ -18,7 +18,7 @@ public class Articles {
         this.source = source;
         this.publishedAt = publishedAt;
     }
-
+//chaneg 1
     public String getMpublishedAt() {
         return publishedAt;
     }
