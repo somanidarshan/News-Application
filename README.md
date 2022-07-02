@@ -13,7 +13,7 @@ MyNewsFeed is a news fetching application that uses News API to fetch the data. 
 
 ## Screenshots
 <p align="center">
-  <img src="[https://github.com/AbhishekKandalkar123/MyNewsFeed/blob/master/Images/tempsnip2.png](https://github.com/somanidarshan/News-Application/blob/master/NewsApplication/tempsnip.png)"  hspace=10 width="225">
+  <img src="https://github.com/somanidarshan/News-Application/blob/master/NewsApplication/tempsnip.png"  hspace=10 width="225">
   <img src="https://github.com/AbhishekKandalkar123/MyNewsFeed/blob/master/Images/tempsnip.png"  hspace=10 width="225">
   <img src="https://github.com/AbhishekKandalkar123/MyNewsFeed/blob/master/Images/tempsnip3.png"  hspace=10 width="225">
   <img src="https://github.com/AbhishekKandalkar123/MyNewsFeed/blob/master/Images/tempsnip4.png"  hspace=10 width="225">
