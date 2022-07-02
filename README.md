@@ -1,12 +1,12 @@
-# MyNewsFeed
+# MyNewsPartner
 
 ## Basic Description 
-MyNewsFeed is a news fetching application that uses News API to fetch the data. User can regularly get the news according to the news category.
+MyNewsPartner is a news application that uses News API to fetch the data. Users can get an update of news according to the categories for eg. Sports,Business,Politics,etc.
 
 ## Tools
 - News API
 - HTTP Networking
-- Retrofit
+- Retrofit 
 - Picasso library
 
 
